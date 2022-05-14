@@ -1,0 +1,9 @@
+gradle scripts-- to add dependencies
+                a)fetching data from api 
+                b)for lo
+
+
+one will be for volley
+one will be for picasso 
+
+we add these in gradle module

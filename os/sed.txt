@@ -1,0 +1,71 @@
+[10:31 am, 17/05/2022] Lavesh Soni Juet: #include <stdio.h>
+#include <math.h>
+int main()
+{
+    int pc,hp,st,offset=0,p_add = 0;
+    int v_add = 0;
+
+    printf("\nEnter the virtual address:\n");
+    scanf("%d", &v_add);
+
+    printf("\nEnter the Base of :\n");
+
+    printf("Program Code:\n");
+    scanf("%d",&pc);
+    printf("Heap:\n");
+    scanf("%d",&hp);
+    printf("Stack:\n");
+    scanf("%d",&st);
+    
+    int seg[14];
+    int count = 0;
+    for (int i = 0; i < 14,v_add != 0; i++)
+    {
+        seg[i] = v_add % 2;
+        v_add = v_add / 2;
+        count++;
+    }
+
+    for(int i=count;i<14;i++)
+    {
+        seg[i] = 0;
+    }
+
+    int base = 0;
+
+    if(seg[13] == 0 && seg[12] == 0)
+    {
+        base = pc*1024;
+    }
+    else if(seg[13] == 0 && seg[12] == 1)
+    {
+        base = hp*1024;
+    }
+    else if(seg[13] == 1 && seg[12] == 1)
+    {
+        base = st*1024;
+    }
+    else
+    {
+        printf("Dead State\n");
+    }
+
+    int p_count = 0;
+    for (int i = 0; i < 12; i++)
+    {
+        if (seg[i] == 1)
+        {
+            offset += pow(2, p_count);
+            p_count++;
+        }
+        else
+        {
+            p_count++;
+        }
+    }
+
+    p_add = offset + base;
+    printf("Physical Address: %d\n",p_add);
+
+    return 0;
+}
